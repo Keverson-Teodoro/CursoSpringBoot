@@ -1,15 +1,33 @@
 package cursoSpring.udemy.CursoSpringUdemy.model;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "produto")
 public class Produto {
+
+
+    @Id
+    @Column(name = "id_produto")
     private long id;
+
+    @Column(name = "nome")
     private String name;
+
+    @Column(name = "descricao")
     private String descricao;
+
+    @Column(name = "preco")
     private Double price;
 
-    // Construtor padrão
+
     public Produto() {}
 
-    // Construtor com todos os campos
+
     public Produto(long id, String name, String descricao, Double price) {
         this.id = id;
         this.name = name;
@@ -17,7 +35,7 @@ public class Produto {
         this.price = price;
     }
 
-    // Getters e Setters
+
     public long getId() {
         return id;
     }
@@ -50,7 +68,7 @@ public class Produto {
         this.price = price;
     }
 
-    // Método toString
+
     @Override
     public String toString() {
         return "Produto{" +
