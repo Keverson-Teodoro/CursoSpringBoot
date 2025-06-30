@@ -1,9 +1,11 @@
 package cursoSpring.udemy.CursoSpringUdemy.controller;
 
 import cursoSpring.udemy.CursoSpringUdemy.repository.ProdutoRepository;
+import cursoSpring.udemy.CursoSpringUdemy.service.ProdutoService;
 import org.springframework.web.bind.annotation.*;
 
 import cursoSpring.udemy.CursoSpringUdemy.model.Produto;
+import org.yaml.snakeyaml.introspector.Property;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -13,11 +15,13 @@ import java.util.UUID;
 @RequestMapping("/produtos")
 public class ProdutoController {
 
-    private ProdutoRepository produtoRepository;
+    private final ProdutoRepository produtoRepository;
+    private final ProdutoService produtoService;
 
 
-    public ProdutoController(ProdutoRepository produtoRepository) {
+    public ProdutoController(ProdutoRepository produtoRepository, ProdutoService produtoService) {
         this.produtoRepository = produtoRepository;
+        this.produtoService = produtoService;
     }
 
     @PostMapping
@@ -33,6 +37,11 @@ public class ProdutoController {
         Optional<Produto> produto = produtoRepository.findById(id);
 
         return produto.orElse(null);
+    }
+
+    @DeleteMapping("{id}")
+    public String excluir(@PathVariable("id") long id){
+        return produtoService.deletarProduto(id);
     }
 
 
