@@ -44,6 +44,22 @@ public class ProdutoController {
         return produtoService.deletarProduto(id);
     }
 
+    @PutMapping("{id}")
+    public String atualizar(@PathVariable("id") long id, @RequestBody Produto produto){
+
+        try{
+            produto.setId(id);
+            produtoRepository.save(produto);
+        }
+        catch (NullPointerException e ){
+            return "Produto não encontrado" + e.getMessage();
+        }
+
+        return "Produto modificado";
+
+
+    }
+
 
 
     
