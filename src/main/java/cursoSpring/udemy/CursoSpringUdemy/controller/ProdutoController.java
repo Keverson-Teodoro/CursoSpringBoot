@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import cursoSpring.udemy.CursoSpringUdemy.model.Produto;
 import org.yaml.snakeyaml.introspector.Property;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -44,6 +45,7 @@ public class ProdutoController {
         return produtoService.deletarProduto(id);
     }
 
+    //endpoint para atualizar os dados
     @PutMapping("{id}")
     public String atualizar(@PathVariable("id") long id, @RequestBody Produto produto){
 
@@ -58,6 +60,12 @@ public class ProdutoController {
         return "Produto modificado";
 
 
+    }
+
+    // endpoint para buscar produto pelo nome
+    @GetMapping
+    public List<Produto> buscar(@RequestParam("name") String name){
+        return produtoRepository.findByName(name);
     }
 
 
